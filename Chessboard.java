@@ -2,15 +2,16 @@ package com.java.queens;
 
 public class Chessboard
 {
-	private String[][] board1 = new String[rc][rc];
-	private static int rc = 0;
+	public String[][] board1 = new String[rc][rc];
+	public static int rc = 0;
 
 	public Chessboard(int boom)
 	{
 	rc = boom;
+	board1 = createBoard(rc);
 	}
 
-	public String[][] createBoard(int num)
+	public static String[][] createBoard(int num)
 	{
 		 String[][] board1 = new String[rc][rc];
 		 for(int row = 0; row < board1.length; row++)
@@ -34,7 +35,6 @@ public class Chessboard
 	public static void main(String args[])
 	{
 		Chessboard board = new Chessboard(10);
-		board.board1 = board.createBoard(10);
 		System.out.println(board);
 		
 	}
