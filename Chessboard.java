@@ -21,6 +21,15 @@ public class Chessboard
 		 }
 		 return board1;
 	}
+	public boolean isQueen(Queen q)
+	{
+		int row = board1.length;
+		int col = board1[row].length;
+		if(q.x == row && q.y == col)
+			return true;
+		else
+			return false;
+	}
 	public String toString()
 	{
 		String result = "\n";
