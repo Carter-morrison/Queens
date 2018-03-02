@@ -12,34 +12,78 @@ public class Queen
 		this.y = y;
 		b.board1 = b.createBoard(b.rc);
 		board = b;
+		board.board1[x][y] = "Q";
 		
 	}
 	
-	public void QueenRow(int x, int y)
+	public void QueenLeft(int x, int y)
 	{
-		if( y == board.board1[x].length - 1 ) 
-				board.board1[x][y] = "X";
+		if(y ==  board.board1[x].length - 1)
+			board.board1[x][y] = "x";
 		
 		else
 		{
-			board.board1[x][y] = "X";
-			QueenRow(x,y+1);
-			//QueenColumun(x,y-1);
-		}	
+		board.board1[x][y+1] = "x";
+		QueenLeft(x,y+1);
+		}
+		
+	}
+	public void QueenRight(int x, int y)
+	{
+		if(y ==  0)
+			board.board1[x][y] = "x";
+		
+		else
+		{
+		board.board1[x][y-1] = "x";
+		QueenRight(x,y-1);
+		}
 		
 		
 		
 	}
-		public boolean diagnol(Chessboard b)
+	public void QueenDown(int x, int y)
 	{
-		String[][] name = b.board1;
+		if(x ==  board.board1.length - 1)
+			board.board1[x][y] = "x";
+		
+		else
 		{
-			for (int row = 0; row < name.length; row++)
-			{
-				if (name[row][row] == "Q")
-					return true;
-			}
-			return false;
+		board.board1[x+1][y] = "x";
+		QueenDown(x + 1, y);
+		}
+		
+	}
+	public void QueenUp(int x, int y)
+	{
+		if(x ==  0)
+			board.board1[x][y] = "x";
+		
+		else
+		{
+		board.board1[x-1][y] = "x";
+		QueenUp(x - 1, y);
+		}
+		
+	}
+	public void diagnolLeft(int x,int y)
+	{
+		if( x == 0 || y == 0)
+			board.board1[x][y] = "x";
+		else
+		{
+			board.board1[x-1][y-1] = "x";
+			diagnolLeft(x-1,y-1);
+		}
+	}
+	public void diagnolRight(int x,int y)
+	{
+		if( x == board.board1.length - 1 || y == board.board1.length - 1)
+			board.board1[x][y] = "x";
+		else
+		{
+			board.board1[x+1][y+1] = "x";
+			diagnolRight(x+1,y+1);
 		}
 	}
 	public String toString()
@@ -53,25 +97,39 @@ public class Queen
 		}
 		return result;
 	}
-	public void fix(String[][] b)
+	public void queenMoves( Queen Queen1)
 	{
-		 for(int row = 0; row < b.length; row++)
-		 {
-			 for(int col = 0; col < b[row].length; col++)
-				 if(b[row][col] == "x")
-					 b[row][col] = "-";
-		 }
+		Queen1.QueenLeft(Queen1.x,Queen1.y);
+		Queen1.QueenRight(Queen1.x,Queen1.y);
+		Queen1.QueenDown(Queen1.x, Queen1.y);
+		Queen1.QueenUp(Queen1.x, Queen1.y);
+		Queen1.diagnolLeft(Queen1.x,Queen1.y);
+		Queen1.diagnolRight(Queen1.x,Queen1.y);
+		
 	}
 	
+	public Queen ifValid(Queen Queen )
+	{
+		if( board.board1[x][y].equals("-") )
+			return Queen;
+		else
+		{
+			Queen.y = Queen.y + 1;
+			return ifValid(Queen);
+			
+		}
+		
+		
+	}
 	public static void main(String[] args)
 	{
 		ChessBoard myBoard = new ChessBoard(10);
 		Queen Queen1 = new Queen(myBoard, 2,5);
-		System.out.println(Queen1);
-		Queen1.QueenRow(Queen1.x,Queen1.y);
+		Queen1.queenMoves(Queen1);
 		System.out.println(myBoard);
 		
 	}
+	
 	
 
 }
