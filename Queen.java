@@ -30,6 +30,18 @@ public class Queen
 		
 		
 	}
+		public boolean diagnol(Chessboard b)
+	{
+		String[][] name = b.board1;
+		{
+			for (int row = 0; row < name.length; row++)
+			{
+				if (name[row][row] == "Q")
+					return true;
+			}
+			return false;
+		}
+	}
 	public String toString()
 	{
 		String result = "\n";
@@ -40,6 +52,15 @@ public class Queen
 			result += "\n";
 		}
 		return result;
+	}
+	public void fix(String[][] b)
+	{
+		 for(int row = 0; row < b.length; row++)
+		 {
+			 for(int col = 0; col < b[row].length; col++)
+				 if(b[row][col] == "x")
+					 b[row][col] = "-";
+		 }
 	}
 	
 	public static void main(String[] args)
