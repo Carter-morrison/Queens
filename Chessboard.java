@@ -1,11 +1,11 @@
-package com.java.queens;
+package Queens;
 
-public class Chessboard
+public class ChessBoard
 {
 	public String[][] board1 = new String[rc][rc];
 	public static int rc = 0;
 
-	public Chessboard(int boom)
+	public ChessBoard(int boom)
 	{
 	rc = boom;
 	board1 = createBoard(rc);
@@ -30,6 +30,95 @@ public class Chessboard
 		else
 			return false;
 	}
+//	public Queen ifValid(ChessBoard b,int x , int y )
+//	{
+//		if( board1[x][y].equals("-") )
+//		{
+//			Queen Queen = new Queen(b, x,y);
+//			return Queen;
+//		}
+//			else
+//		{
+//			y = y + 1;
+//			return ifValid(b, x,y+1);
+//			
+//		}
+		
+		
+//	}
+	public void QueenLeft(int x, int y)
+	{
+		if(y ==  board1[x].length - 1)
+			board1[x][y] = "x";
+		
+		else
+		{
+		board1[x][y+1] = "x";
+		QueenLeft(x,y+1);
+		}
+		
+	}
+	public void QueenRight(int x, int y)
+	{
+		if(y ==  0)
+			board1[x][y] = "x";
+		
+		else
+		{
+		board1[x][y-1] = "x";
+		QueenRight(x,y-1);
+		}
+		
+		
+		
+	}
+	public void QueenDown(int x, int y)
+	{
+		if(x ==  board1.length - 1)
+			board1[x][y] = "x";
+		
+		else
+		{
+		board1[x+1][y] = "x";
+		QueenDown(x + 1, y);
+		}
+		
+	}
+	public void QueenUp(int x, int y)
+	{
+		if(x ==  0)
+			board1[x][y] = "x";
+		
+		else
+		{
+		board1[x-1][y] = "x";
+		QueenUp(x - 1, y);
+		}
+		
+	}
+	public void diagnolLeft(int x,int y)
+	{
+		if( x == 0 || y == 0)
+			board1[x][y] = "x";
+		else
+		{
+			board1[x-1][y-1] = "x";
+			diagnolLeft(x-1,y-1);
+		}
+	}
+	public void diagnolRight(int x,int y)
+	{
+		if( x == board1.length - 1 || y == board1.length - 1)
+			board1[x][y] = "x";
+		else
+		{
+			board1[x+1][y+1] = "x";
+			diagnolRight(x+1,y+1);
+		}
+	}
+
+ 
+	
 	public String toString()
 	{
 		String result = "\n";
@@ -43,8 +132,14 @@ public class Chessboard
 	}
 	public static void main(String args[])
 	{
-		Chessboard board = new Chessboard(10);
+		ChessBoard board = new ChessBoard(10);
 		System.out.println(board);
+		
+	}
+
+	public void queenAdd(Queen newQueen)
+	{
+		
 		
 	}
 }
